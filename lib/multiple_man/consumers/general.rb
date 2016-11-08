@@ -67,6 +67,7 @@ module MultipleMan
       def subscribers=(subscribers)
         @subscribers = subscribers.map { |s|
           key = routing_key_for_subscriber(s).gsub('.', '\.').gsub('#', '.*')
+          key = key.split(".")[1..-1].join(".")
           [/#{key}$/, s]
         }.to_h
       end
