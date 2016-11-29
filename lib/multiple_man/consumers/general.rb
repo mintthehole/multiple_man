@@ -28,7 +28,8 @@ module MultipleMan
       def create_bindings
         subscribers.values.each do |subscriber|
           MultipleMan.logger.info "Listening for #{subscriber.listen_to} with routing key #{subscriber.routing_key}."
-          queue.bind(topic, routing_key: routing_key_for_subscriber(subscriber))
+          tmp = topic.split(".")[1..-1].join(".")
+          queue.bind(topic, routing_key: routing_key_for_subscriber(subscriber).split(".")[1..-1].join("."))
         end
       end
 
