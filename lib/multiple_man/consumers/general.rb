@@ -29,7 +29,7 @@ module MultipleMan
         subscribers.values.each do |subscriber|
           MultipleMan.logger.info "Listening for #{subscriber.listen_to} with routing key #{subscriber.routing_key}."
           tmp = topic.split(".")[1..-1].join(".")
-          queue.bind(topic, routing_key: routing_key_for_subscriber(subscriber).split(".")[1..-1].join("."))
+          queue.bind(tmp, routing_key: routing_key_for_subscriber(subscriber).split(".")[1..-1].join("."))
         end
       end
 
